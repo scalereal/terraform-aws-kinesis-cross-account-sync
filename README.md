@@ -2,6 +2,7 @@
 Terraform Module to sync kinesis streams across two different AWS accounts
 
 
+
 ## Providers
 
 | Name | Version |
@@ -14,6 +15,7 @@ Terraform Module to sync kinesis streams across two different AWS accounts
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:-----:|
+| service\_name | Service name for which streams will be synced | `string` | n/a | yes |
 | sink\_streams | Comma separated list of streams to which source stream will be synced with. | `string` | n/a | yes |
 | source\_stream | Streams with which sink streams will be synced | `string` | n/a | yes |
 
