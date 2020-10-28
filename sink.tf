@@ -15,18 +15,15 @@ data "aws_iam_policy_document" "assume_lambda_role_trust_relationship_document" 
 data "aws_iam_policy_document" "assume_lambda_policy_document" {
   statement {
     sid = "1"
-
     actions = [
       "kinesis:DescribeStream",
       "kinesis:ListStreams",
       "kinesis:PutRecord",
       "kinesis:PutRecords"
     ]
-
     resources = [
       "arn:aws:kinesis:us-east-1:${data.aws_caller_identity.sink.account_id}:stream/*"
     ]
-
     effect = "Allow"
   }
 }
@@ -41,16 +38,4 @@ resource "aws_iam_role_policy" "assume_lambda_policy" {
   provider = aws.sink
   policy   = data.aws_iam_policy_document.assume_lambda_policy_document.json
   role     = aws_iam_role.assume_lambda_role.id
-}
-
-resource "aws_kinesis_stream" "sink_stream_one" {
-  name        = "sink-stream-one"
-  shard_count = 1
-  provider    = aws.sink
-}
-
-resource "aws_kinesis_stream" "sink_stream_two" {
-  name        = "sink-stream-two"
-  shard_count = 1
-  provider    = aws.sink
 }

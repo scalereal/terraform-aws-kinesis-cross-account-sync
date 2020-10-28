@@ -1,6 +1,6 @@
 data "archive_file" "lambda_zip" {
   type        = "zip"
-  source_dir  = "lambda"
+  source_dir  = "${path.module}/lambda"
   output_path = "lambda.zip"
 }
 
@@ -21,14 +21,18 @@ resource "aws_lambda_function" "sync_lambda" {
   environment {
     variables = {
       KINESIS_ASSUMED_ROLE = aws_iam_role.assume_lambda_role.arn,
-      STREAMS              = "sink-stream-one,sink-stream-two"
+      STREAMS              = var.sink_streams
     }
   }
 }
 
+data "aws_kinesis_stream" "source" {
+  name = var.source_stream
+}
+
 resource "aws_lambda_event_source_mapping" "kinesis_lambda_event_mapping" {
   batch_size        = 100
-  event_source_arn  = aws_kinesis_stream.source.arn
+  event_source_arn  = data.aws_kinesis_stream.source.arn
   enabled           = true
   function_name     = aws_lambda_function.sync_lambda.arn
   starting_position = "TRIM_HORIZON"
