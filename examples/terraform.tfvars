@@ -1,0 +1,5 @@
+aws_region         = "us-east-1"
+source_aws_profile = "source_profile"
+sink_aws_profile   = "sink_profile"
+source_stream      = "source-stream"
+sink_streams       = "sink-stream-one,sink-stream-two"

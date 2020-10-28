@@ -1,10 +1,12 @@
 # terraform-kinesis-cross-account-sync
 Terraform Module to sync kinesis streams across two different AWS accounts
+
+
 ## Providers
 
 | Name | Version |
 |------|---------|
-| archive | n/a |
+| archive | ~> 2.0 |
 | aws | ~> 3.12 |
 | aws.sink | ~> 3.12 |
 
@@ -12,9 +14,8 @@ Terraform Module to sync kinesis streams across two different AWS accounts
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:-----:|
-| aws\_region | AWS region in which resources will be provisioned | `string` | n/a | yes |
-| sink\_aws\_profile | AWS profile with which resources will be provisioned in the sink account | `string` | n/a | yes |
-| source\_aws\_profile | AWS profile with which resources will be provisioned | `string` | n/a | yes |
+| sink\_streams | Comma separated list of streams to which source stream will be synced with. | `string` | n/a | yes |
+| source\_stream | Streams with which sink streams will be synced | `string` | n/a | yes |
 
 ## Outputs
 
