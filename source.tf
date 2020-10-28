@@ -20,7 +20,7 @@ data "aws_iam_policy_document" "lambda_execution_role_policy_document" {
       "sts:AssumeRole"
     ]
     resources = [
-      "arn:aws:iam::${data.aws_caller_identity.sink.account_id}:role/assume-lambda-role"
+      "arn:aws:iam::${data.aws_caller_identity.sink.account_id}:role/${var.service_name}-assume-lambda-role"
     ]
     effect = "Allow"
   }
@@ -50,7 +50,7 @@ data "aws_iam_policy_document" "lambda_execution_role_policy_document" {
 }
 
 resource "aws_iam_role" "lambda_execution_role" {
-  name               = "lambda-execution-role"
+  name               = "${var.service_name}-lambda-execution-role"
   assume_role_policy = data.aws_iam_policy_document.lambda_execution_role_trust_relationship_document.json
 }
 
