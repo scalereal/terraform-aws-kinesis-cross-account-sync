@@ -1,3 +1,8 @@
+variable "service_name" {
+  type        = string
+  description = "Service name for which streams will be synced"
+}
+
 variable "source_stream" {
   type        = string
   description = "Streams with which sink streams will be synced"

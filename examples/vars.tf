@@ -3,6 +3,11 @@ variable "aws_region" {
   description = "AWS region in which resources will be provisioned"
 }
 
+variable "service_name" {
+  type        = string
+  description = "Service name for which streams will be synced"
+}
+
 variable "source_aws_profile" {
   type        = string
   description = "AWS profile with which resources will be provisioned"

@@ -11,7 +11,7 @@ data "aws_caller_identity" "sink" {
 }
 
 resource "aws_lambda_function" "sync_lambda" {
-  function_name    = "kinesis-cross-account-sync-lambda"
+  function_name    = "${var.service_name}-kinesis-cross-account-sync-lambda"
   handler          = "index.handler"
   filename         = "lambda.zip"
   role             = aws_iam_role.lambda_execution_role.arn

@@ -1,4 +1,5 @@
 aws_region         = "us-east-1"
+service_name       = "serverless"
 source_aws_profile = "source_profile"
 sink_aws_profile   = "sink_profile"
 source_stream      = "source-stream"

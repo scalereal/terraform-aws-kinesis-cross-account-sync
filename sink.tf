@@ -6,7 +6,7 @@ data "aws_iam_policy_document" "assume_lambda_role_trust_relationship_document" 
     ]
     principals {
       type        = "AWS"
-      identifiers = ["arn:aws:iam::${data.aws_caller_identity.source.account_id}:role/lambda-execution-role"]
+      identifiers = ["arn:aws:iam::${data.aws_caller_identity.source.account_id}:role/${var.service_name}-lambda-execution-role"]
     }
     effect = "Allow"
   }
@@ -30,7 +30,7 @@ data "aws_iam_policy_document" "assume_lambda_policy_document" {
 
 resource "aws_iam_role" "assume_lambda_role" {
   provider           = aws.sink
-  name               = "assume-lambda-role"
+  name               = "${var.service_name}-assume-lambda-role"
   assume_role_policy = data.aws_iam_policy_document.assume_lambda_role_trust_relationship_document.json
 }
 
